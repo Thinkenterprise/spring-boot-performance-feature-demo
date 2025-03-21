@@ -18,17 +18,17 @@ class ThreadsControllerTest {
     @Test
     void testVirtualThreadsClass() throws InterruptedException {
         var thread1 = Thread.startVirtualThread(() -> {
-            log.info("{}: Hello World!", Thread.currentThread());
+            log.info("{}: Hello World 1!", Thread.currentThread());
         });
         thread1.join();
 
         var thread2 = Thread.ofVirtual().unstarted(() -> {
-            log.info("{}: Hello World!", Thread.currentThread());
+            log.info("{}: Hello World 2!", Thread.currentThread());
         });
         thread2.join();
 
         Thread.ofVirtual().start(() -> {
-            log.info("{}: Hello World!", Thread.currentThread());
+            log.info("{}: Hello World 3!", Thread.currentThread());
         });
     }
 
@@ -105,7 +105,7 @@ class ThreadsControllerTest {
     void testVirtualThreadsWithSemaphores() {
         var semaphore = new Semaphore(2);
         try (var executorService = Executors.newVirtualThreadPerTaskExecutor()) {
-            for (int i = 0; i < 10; i++) {
+            for (var i = 0; i < 10; i++) {
                 executorService.submit(() -> {
                     try {
                         semaphore.acquire();
