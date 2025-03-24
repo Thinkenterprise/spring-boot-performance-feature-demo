@@ -1,9 +1,8 @@
 ---
 marp: true
 theme: msg
-author: "Jan Tuttas"
-footer: msg group | Spring Boot gibt Gas | 28.03.2025
 header: Virtual Threads
+footer: © msg group | Spring Boot gibt Gas | 28.03.2025
 paginate: true
 
 ---
@@ -12,6 +11,8 @@ paginate: true
 # Spring Boot gibt Gas
 
 ## Virtual Threads
+
+![title h:720](title.jpg)
 
 ---
 
