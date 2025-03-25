@@ -1,0 +1,13 @@
+{
+    "markdown.marp.themes": [
+      // [online, latest]
+      //"https://gitlab.msg.team/tuttaj/marp-msg-theme/-/raw/main/themes/msg.css"
+  
+      /* [offline, development, default]
+       * - use local css files
+       * - comment before merge to master 
+       */
+      "./themes/msg.css"
+    ]
+  }
+  

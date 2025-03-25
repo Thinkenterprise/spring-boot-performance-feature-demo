@@ -12,7 +12,7 @@ paginate: true
 
 ## Virtual Threads
 
-![title h:720](title.jpg)
+![title h:720](../themes/assets/title-automotive.png)
 
 ---
 

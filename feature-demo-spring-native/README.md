@@ -12,7 +12,7 @@ paginate: true
 
 ## Spring Native
 
-![title h:720](title.jpg)
+![title h:720](../themes/assets/title-msg.png)
 
 ---
 
@@ -22,7 +22,8 @@ With *Spring Ahead-of-Time Support* the performance of Spring Boot applications 
 
 ---
 
-# Features 
+# Features
+
 Features of Spring Ahead-of-Time Support are:
 
 - Instant Startup (JIT: JVM-start, class Loading e.g. is not necessary)
@@ -51,11 +52,13 @@ Use Cases where Spring Ahead-of-Time Support is not suitable:
 ---
 
 # Java
+
 A fundamental requirement for using Spring Ahead-of-Time Support is **GraalVM**. GraalVM was released by **Oracle Labs** in 2019. It provides an Ahead-of-Time (AOT) compiler that can generate native OS binaries for Java and other languages. When using GraalVM, it is important to ensure that the bundled JDK is used, as it includes specific adaptations for GraalVM that other JDKs do not have. For example, GraalVM 21 comes with JDK 21 included.
 
 ---
 
 # Spring Boot
+
 **Spring Boot** Ahead-of-Time Support has been available since version 3.0 (2022). It is based on the Spring Ahead-of-Time (AOT) support introduced in Spring Framework 6.0, which includes:
 
 - Build Integration
@@ -65,11 +68,13 @@ A fundamental requirement for using Spring Ahead-of-Time Support is **GraalVM**.
 ---
 
 # Picture 
+
 Architectural images if necessary? 
 
 ---
 
 # Advantages
+
 - Faster startup 
 - Constant fast response times
 - Less resource consumption
@@ -78,6 +83,7 @@ Architectural images if necessary?
 ---
 
 # Disadvantages
+
 - Long build times
 - No runtime optimization 
 - Reflection must be configured manually 
@@ -85,14 +91,13 @@ Architectural images if necessary?
 ---
 
 # Benchmarks 
-Performance comparisons if they exist and make sense
 
-| Metric                             | Spring Boot Native (GraalVM AOT) | Spring Boot JVM (HotSpot) | Difference                         |
+| Metric                             | Spring Boot Native | Spring Boot JVM | Difference                         |
 |------------------------------------|----------------------------------|---------------------------|-------------------------------------|
 | **Startup Time**                   | 0.22 seconds                    | 7.18 seconds             | **32x faster**                     |
-| **Memory Usage (RSS)**             | 694 MB                           | 1,751 MB                  | **~60% less memory consumption**   |
-| **Throughput (300 users, 20 iterations)** | 449.8 requests/sec           | 433.4 requests/sec       | **16.4 more requests per second**  |
-| **Avg Response Time (300 users, 20 iterations)** | 409 ms                    | 433 ms                    | **24 ms faster**                   |
+| **Memory Usage (RSS)**             | 694 MB                           | 1,751 MB                  | **~60% less**   |
+| **Throughput (300 users, 20 iter.)** | 449.8 requests/sec           | 433.4 requests/sec       | **16.4 more requests/sec**  |
+| **Avg Response Time (300 users, 20 iter.)** | 409 ms                    | 433 ms                    | **24 ms faster**                   |
 | **CPU Usage**                      | Lower                            | Higher                    | **Less CPU consumption**           |
 | **Heap Usage**                     | Higher                           | Lower                     | **More heap usage in Native**      |
 | **Build Time**                     | 6 minutes 11 seconds             | 28.4 seconds             | **~12x longer build time**         |
@@ -102,9 +107,3 @@ Performance comparisons if they exist and make sense
 
 # Other  
 Comments you would like to make
-
-
-
-
-
-
