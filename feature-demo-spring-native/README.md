@@ -12,69 +12,88 @@ paginate: true
 
 ## Spring Native
 
-![title h:720](../themes/assets/title-msg.png)
+![title h:720](./themes/assets/title-msg.png)
 
 ---
+<!-- 
+(JIT: JVM-start, class Loading e.g. is not necessary)
+(JIT: Optimization after first start needs time)
+(JIT: JVM, Metadata) 
+(JIT: Includes unused classes and libraries ) 
+(JIT: Reflection are a point of attack) 
+-->
 
 # Motivation 
 
-With *Spring Ahead-of-Time Support* the performance of Spring Boot applications is significantly improved.
+1. **Instant Startup** 
+2. **No Warmup** 
+3. Low Resource Usage 
+4. Compact Packaging 
+5. Reduced Attack Surface 
 
 ---
 
-# Features
+<!-- 
+(Why: Startup)
+(Why:Low resources and memory)
+(Why: 1&2)
+(Can!!)
+(Can!!)
+-->
 
-Features of Spring Ahead-of-Time Support are:
-
-- Instant Startup (JIT: JVM-start, class Loading e.g. is not necessary)
-- No Warmup (JIT: Optimization after first start needs time)
-- Low Resource Usage (JIT: JVM, Metadata) 
-- Compact Packaging (JIT: Includes unused classes and libraries ) 
-- Reduced Attack Surface (JIT: Reflection are a point of attack) 
-
----
 
 # Use Cases 
-Use Cases of Spring Ahead-of-Time Support are: 
-
-1. FaaS (Why: Startup)
-2. Low Memory and CPU (Why:Low resources and memory)
-3. Zero to Scale (Why: 1&2)
-4. Microservices (Can!!)
-5. Container & Kubernetes (Can!!)
-
-Use Cases where Spring Ahead-of-Time Support is not suitable:
-- Huge Memory and CPU (Why: AOT Features are not necessary )
-- Very Frequent Deployments (Why: Compilation Time to long)
-- High Traffic Websites (Why: Long-term application, path optimization)
-- Big Monolithic Application – (Why: Long-term application, path optimization)
+1. **Function as a Service (FaaS)**
+2. **Container & Kubernetes (CaaS)** 
+3. Zero to Scale 
+4. Low Memory and CPU 
+5. Microservices 
 
 ---
+
+<!-- 
+(Why: Compilation Time to long)
+(Why: Long-term application, path optimization)
+(Why: Long-term application, path optimization)
+
+-->
+
+# No Suitable Use Cases 
+
+1. Very Frequent Deployments 
+2. High Traffic Websites 
+3. Big Monolithic Application 
+
+---
+
+
+<!--
+A fundamental requirement for using Spring Ahead-of-Time Support is **GraalVM**. GraalVM was released by **Oracle Labs** in 2019. It provides an Ahead-of-Time (AOT) compiler that can generate native OS binaries for Java and other languages. When using GraalVM, it is important to ensure that the bundled JDK is used, as it includes specific adaptations for GraalVM that other JDKs do not have. For example, GraalVM 21 comes with JDK 21 included.
+-->
+
 
 # Java
 
-A fundamental requirement for using Spring Ahead-of-Time Support is **GraalVM**. GraalVM was released by **Oracle Labs** in 2019. It provides an Ahead-of-Time (AOT) compiler that can generate native OS binaries for Java and other languages. When using GraalVM, it is important to ensure that the bundled JDK is used, as it includes specific adaptations for GraalVM that other JDKs do not have. For example, GraalVM 21 comes with JDK 21 included.
+* GraalVM Oracle Labs (2019)
+* Ensure that the GraalVM bundled JDK is used 
 
 ---
 
-# Spring Boot
-
+<!-- 
 **Spring Boot** Ahead-of-Time Support has been available since version 3.0 (2022). It is based on the Spring Ahead-of-Time (AOT) support introduced in Spring Framework 6.0, which includes:
-
 - Build Integration
 - Spring Metadata for Reflection & Proxies
 - Configuration Hints for Custom Reflection & Proxies
+-->
+
+# Spring Boot
+* Spring Boot Ahead-of-Time Support 3.0 (2022)
+* Spring Framework 6.0 (Build Integration, Compiler Metadata, Hints)
 
 ---
 
-# Picture 
-
-Architectural images if necessary? 
-
----
 
 # Advantages
-
 - Faster startup 
 - Constant fast response times
 - Less resource consumption
@@ -83,7 +102,6 @@ Architectural images if necessary?
 ---
 
 # Disadvantages
-
 - Long build times
 - No runtime optimization 
 - Reflection must be configured manually 
@@ -91,19 +109,22 @@ Architectural images if necessary?
 ---
 
 # Benchmarks 
+Performance comparisons if they exist and make sense
 
-| Metric                             | Spring Boot Native | Spring Boot JVM | Difference                         |
+| Metric                             | Spring Boot Native (GraalVM AOT) | Spring Boot JVM (HotSpot) | Difference                         |
 |------------------------------------|----------------------------------|---------------------------|-------------------------------------|
 | **Startup Time**                   | 0.22 seconds                    | 7.18 seconds             | **32x faster**                     |
-| **Memory Usage (RSS)**             | 694 MB                           | 1,751 MB                  | **~60% less**   |
-| **Throughput (300 users, 20 iter.)** | 449.8 requests/sec           | 433.4 requests/sec       | **16.4 more requests/sec**  |
-| **Avg Response Time (300 users, 20 iter.)** | 409 ms                    | 433 ms                    | **24 ms faster**                   |
+| **Memory Usage (RSS)**             | 694 MB                           | 1,751 MB                  | **~60% less memory consumption**   |
+| **Throughput (300 users, 20 iterations)** | 449.8 requests/sec           | 433.4 requests/sec       | **16.4 more requests per second**  |
+| **Avg Response Time (300 users, 20 iterations)** | 409 ms                    | 433 ms                    | **24 ms faster**                   |
 | **CPU Usage**                      | Lower                            | Higher                    | **Less CPU consumption**           |
 | **Heap Usage**                     | Higher                           | Lower                     | **More heap usage in Native**      |
 | **Build Time**                     | 6 minutes 11 seconds             | 28.4 seconds             | **~12x longer build time**         |
 | **Application Size (Docker Image)** | 159 MB                           | 501 MB                    | **~68% smaller image**             |
 
----
 
-# Other  
-Comments you would like to make
+
+
+
+
+

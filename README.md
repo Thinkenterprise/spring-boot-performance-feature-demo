@@ -1,34 +1,34 @@
-# spring-boot-performance-feature-demo
-Shows the new performance features from version 3.0
-# Template for our Projects 
+---
+marp: true
+theme: msg
+header: Spring Native
+footer: © msg group | Spring Boot gibt Gas | 28.03.2025
+paginate: true
 
-# Motivation 
-What does the feature stand for? 1-2 sentences. Short
-Maybe 1-3 use cases
+---
+<!-- _class: title -->
 
-# Java 
-A few words about Java (version, RFC)
+# Spring Boot gibt Gas
 
-# Spring Boot 
-A few words about Spring Boot (Version)
+## Spring Native
 
-# Picture 
-Architectural images if necessary? 
+![title h:720](./themes/assets/title-msg.png)
 
-# Advantages
-Disadvantages die das Feature mit sich bringt 
+---
+<!-- _class: agenda -->
 
-# Disadvantages
-Disadvantages of the feature
+<!--
+Class Data Sharing (CDS) ist ein Feature der JVM (ab Java 9), das das schnellere Starten von Java-Anwendungen ermöglicht, indem es vorverarbeitete Klassendaten in einem gemeinsamen Archiv speichert. Dieses Archiv kann beim nächsten Start wiederverwendet werden.
 
-# Benchmarks 
-Performance comparisons if they exist and make sense
+CRaC ist ein OpenJDK-Projekt, das es ermöglicht, den Zustand einer laufenden Java-Anwendung einzufrieren (Checkpoint) und später genau an diesem Punkt wiederherzustellen (Restore). Ziel ist es, Java-Anwendungen nahezu sofort startbereit zu machen – mit allen initialisierten Komponenten, warmem Cache, Datenbankverbindungen etc.
 
-# Other  
-Comments you would like to make
+-->
 
 
 
+# Agenda
 
-
-
+1. **Spring AOT** (Ahead-of-Time Compilation) (Spring Boot 3.0, 2022)
+1. **CRaC** (Coordinated Restore at Checkpoint) (Spring Boot 3.1, 2023)
+3. **CDS** (Class Data Sharing) (Spring Boot 3.2, 2023)
+4. **Virtual Threads** (Spring Boot 3.2, 2023)
