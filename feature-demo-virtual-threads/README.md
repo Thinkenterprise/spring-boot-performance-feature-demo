@@ -12,7 +12,7 @@ paginate: true
 
 ## Virtual Threads
 
-![title h:720](../themes/assets/title-automotive.png)
+![title h:720](./themes/assets/title-msg.png)
 
 ---
 
@@ -54,7 +54,7 @@ paginate: true
 - Lightweight & Scalable: millions of threads with minimal memory overhead
 - Simplified Concurrency Model: maintains the familiar thread-per-request model
 - Better Debugging & Profiling: works with JFR, JStack, and existing tools.
-- Compatibility: works with existing java.lang.Thread APIs
+- Compatibility: works with existing java.lang.ThreadAPI
 - Improved Context Propagation: Scoped Values replace ThreadLocal
 
 ---
