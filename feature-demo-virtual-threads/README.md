@@ -24,23 +24,22 @@ paginate: true
 - Reactive Programming: scales well but is harder to read, debug, and profile
 - Virtual threads: Lightweight, efficient, massively scalable
 
----
+--- 
+<!-- _class: timeline -->
 
-# Java
+# Timeline: Java / Spring Boot
 
-- Project Loom: introduce a lightweight concurrency construct to Java
-- September '22: Virtual threads introduced as a preview feature (JDK 19, JEP 425)
-- September '23: Virtual threads became stable (JDK 21, JEP 444)
-- Scoped Values (JEP 446): efficient alternative to ThreadLocal for passing contextual data across threads
+Project Loom: introduce a lightweight concurrency construct to Java
 
----
+- <span>September 2022
+JEP 425: Preview Feature in JDK 19</span>
+- <span>October 2022
+Experimental support in Spring Boot</span>
+- <span>September 2023
+JEP 446: Virtual Threads are finalized in JDK 21</span>
+- <span>November 2023
+Full support in Spring Boot 3.2.0</span>
 
-# Spring Boot
-
-- October '22: experimental support for virtual threads
-- November '23: full support for virtual threads with release 3.2.0
-- Easy to use by enabling the flag spring.threads.virtual.enabled
-  - Tomcat and Jetty use virtual threads for request handling
 --- 
 
 # Architecture
@@ -70,7 +69,7 @@ paginate: true
 
 # Examples and Benchmark
 
-- Show in IDE
+Show code ...
 
 ---
 

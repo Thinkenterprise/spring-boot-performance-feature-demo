@@ -75,7 +75,7 @@ class ThreadsControllerTest {
                     try {
                         semaphore.acquire();
                         log.info("{}: Hello World!", Thread.currentThread());
-                        sleep(1000);
+                        sleep(4000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     } finally {
