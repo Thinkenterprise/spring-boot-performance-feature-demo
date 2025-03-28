@@ -32,13 +32,13 @@ paginate: true
 Project Loom: introduce a lightweight concurrency construct to Java
 
 - <span>September 2022
-JEP 425: Preview Feature in JDK 19</span>
+[JEP 425](https://openjdk.org/jeps/425): Preview Feature in JDK 19</span>
 - <span>October 2022
 Experimental support in Spring Boot</span>
 - <span>September 2023
-JEP 446: Virtual Threads are finalized in JDK 21</span>
+[JEP 444](https://openjdk.org/jeps/444): Virtual Threads are finalized in JDK 21</span>
 - <span>November 2023
-Full support in Spring Boot 3.2.0</span>
+Full support in [Spring Boot 3.2.0](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.2-Release-Notes)</span>
 
 --- 
 
@@ -75,12 +75,12 @@ Show code ...
 
 # Comparison
 
-|                        | Platform Threads       | Virtual Threads |
-|--------------------------------|--------------------------------------|--------------------------------|
-| **Implementation**      | Managed by the OS     | Managed by the JVM (userland) |
-| **Pooling**                    | Threads should be pooled             | No pooling, new thread per task |
-| **Lifetime**                   | Long-lived, reused                   | Short-lived, created per task |
-| **Usage**                      | Multiple tasks per thread            | One task per virtual thread |
-| **Thread Cost**                | Heavyweight (more RAM, CPU ...) | Lightweight (very low overhead) |
-| **Blocking I/O**               | Blocks the OS thread                 | Parks the virtual thread |
-| **Scalability**                | Limited by OS resources       | Millions of concurrent threads |
+|                       | Platform Threads                | Virtual Threads                 |
+|-----------------------|---------------------------------|---------------------------------|
+| **Implementation**    | Managed by the OS               | Managed by the JVM (userland)   |
+| **Pooling**           | Threads should be pooled        | No pooling, new thread per task |
+| **Lifetime**          | Long-lived, reused              | Short-lived, created per task   |
+| **Usage**             | Multiple tasks per thread       | One task per virtual thread     |
+| **Thread Cost**       | Heavyweight (more RAM, CPU ...) | Lightweight (very low overhead) |
+| **Blocking I/O**      | Blocks the OS thread            | Parks the virtual thread        |
+| **Scalability**       | Limited by OS resources         | Millions of concurrent threads  |
