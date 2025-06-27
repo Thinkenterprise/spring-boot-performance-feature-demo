@@ -6,6 +6,6 @@ import org.springframework.context.ApplicationListener;
 public class HelloWorldSpringApplicationEventListener implements ApplicationListener<ApplicationEvent> {
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-        System.out.println("Hello World Application Initalizeation: Receive Initalizeation Message " + event.toString());
+        System.out.println("Hello World Application Initialization: Receive Initialization Message " + event.toString());
     }
 }

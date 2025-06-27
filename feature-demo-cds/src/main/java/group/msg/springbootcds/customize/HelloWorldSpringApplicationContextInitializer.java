@@ -7,7 +7,7 @@ public class HelloWorldSpringApplicationContextInitializer implements Applicatio
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        System.out.println("Hello World Application Initalizeation: Initialize the application context");
+        System.out.println("Hello World Application Initialization: Initialize the application context");
 
     }
 
