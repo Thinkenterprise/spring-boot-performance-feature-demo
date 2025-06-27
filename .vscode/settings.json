@@ -1,0 +1,6 @@
+{
+    "markdown.marp.themes": [
+      "./themes/msg.css"
+    ]
+  }
+  
