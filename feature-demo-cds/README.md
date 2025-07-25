@@ -1,12 +1,25 @@
-# spring-boot-performance-feature-demo
+---
+marp: true
+theme: msg
+header: Class Data Sharing (CDS) / AppCDS
+footer: © msg group | Spring Boot gibt Gas II | 01.08.2025
+paginate: true
 
-Shows the new performance features from version 3.0
+---
 
-# Template for our Projects
+<!-- _class: title -->
+
+# Spring Boot gibt Gas II
+
+## Class Data Sharing (CDS) / AppCDS
+
+![title h:720](./themes/assets/title-msg.png)
+
+---
 
 # Motivation
 
-Class Data Sharing (CDS) or "Project Leyden" reduces the startup time and memory footprint of Java applications, leading
+Class Data Sharing (CDS) reduces the startup time and memory footprint of Java applications, leading
 to improved performance. This is particularly useful for applications that need to be restarted frequently or run in
 resource-constrained environments.
 
@@ -64,19 +77,64 @@ The command list changes to:
 
 # Spring Boot
 
+## CDS / AppCDS
 Since CDS / AppCDS is a JDK specific feature, there is no Spring Boot specific implementation.
-But Spring Boot has the start parameter `-Dspring.context.exit=onRefresh`, this can be used to stop the application
-after the context is refreshed. This is useful for creating the shared archive with AppCDS.
+But Spring Boot 3.3 supports it. Therefore it provides the start parameter `-Dspring.context.exit=onRefresh`,
+this can be used to stop the application after the context is refreshed. This is useful for creating the shared
+archive with AppCDS.
 
 So the final commands for Spring Boot would be:
 
-1. Creating the shared archive:
+0. Build jar file with `mvn clean package` or `gradle build` and change into the target directory.
 
-- `java -Dspring.context.exit=onRefresh -XX:ArchiveClassesAtExit=<filename>.jsa -jar <jarfile>`
+1. Extract the application JAR to a directory:
 
-2. Starting the application with the shared archive:
+- `java -Djarmode=tools -jar <jarfile> extract --destination <destinationFolder>`
 
-- `java -Xshare:on -Xlog:class+load:file=<logfile>.log -XX:SharedArchiveFile=<filename>.jsa -jar <jarfile>`
+2. Change to the extracted directory:
+
+- `cd <destinationFolder>`
+
+3. Creating the shared archive:
+
+- `java -XX:ArchiveClassesAtExit=<filename>.jsa -Dspring.context.exit=onRefresh -jar <jarfile>`
+
+4. Starting the application with the shared archive:
+
+- `java -XX:SharedArchiveFile=<filename>.jsa -jar <jarfile>`
+
+Alternativ mit Logging:
+
+- `java -Xlog:class+load:file=<logfile>.log -XX:SharedArchiveFile=<filename>.jsa -jar <jarfile>`
+
+## AOT Cache
+
+Spring Boot Ahead-of-Time (AOT) Cache is a feature that allows pre-compilation of application classes and resources to
+improve startup performance. It is not directly related to CDS or AppCDS, but it can be used in conjunction with them.
+
+0. Build jar file with `mvn clean package` or `gradle build` and change into the target directory.
+
+1. Extract the application JAR to a directory:
+
+- `java -Djarmode=tools -jar <jarfile> extract --destination <destinationFolder>`
+
+2. Change to the extracted directory:
+
+- `cd <destinationFolder>`
+
+3. Record the AOT configuration (.aotconf) file:
+
+-
+`java -XX:AOTMode=record -XX:AOTConfiguration=<config_filename>.aotconf -Dspring.context.exit=onRefresh -jar <jarfile>`
+
+4. Create the AOT cache from the recorded configuration:
+
+-
+`java -XX:AOTMode=create -XX:AOTConfiguration=<config_filename>.aotconf -XX:AOTCache=<cache_filename>.aot -jar <jarfile>`
+
+5. Start the application with the AOT cache:
+
+- `java -XX:AOTCache=<cache_filename>.aot -jar <jarfile>`
 
 # Picture
 
@@ -84,45 +142,34 @@ Architectural images if necessary?
 
 # Advantages
 
-CDS & AppCDS:
-
 - Reduced startup time
 
 # Disadvantages
 
-CDS:
-
-- In large or long-running applications, the reduced startup time of the JVM does not make a significant difference.
-
-AppCDS:
-
+- In long-running applications, the reduced startup time does not make a significant difference.
 - The application has to be started with every change to get a new shared archive.
-- Based on the application size and runtime, it is questionable whether the shared archive is worth the effort.
 
 # Benchmarks
 
-Time until the "Started ..." message is shown:
-Plain start with "java -jar <jarfile>": 2.308 seconds
+| **Startup Time** | Java         | SB-Maven-Plugin | CDS           | AOT-Cache    | 
+|------------------|--------------|-----------------|---------------|--------------|
+| Hello World      | 1.9 seconds  | 1.118 seconds   | 1.044 seconds | 0.74 seconds |    
+| Pet-Clinic       | 10.7 seconds | 6.0 seconds     | 3.94 seconds  | no startup   
+| Real-Projekt     | 13.6 seconds | 11.0 seconds    | 7.81 seconds  | Java 17      |
 
-CDS:
-Start with shared archive: 2.173 seconds
+# Helpful Articles/Talks
 
-AppCDS (old):
-Start with shared archive: 2.147 seconds
+- Übersichts-Artikel:
+  - https://dev.java/learn/jvm/cds-appcds/
+  - https://entwickler.de/java/fast-and-furious-001
+- AppCDS on Spring Framework: https://docs.spring.io/spring-framework/reference/integration/cds.html
+- AppCDS on Spring Boot:
+  - https://docs.spring.io/spring-boot/how-to/class-data-sharing.html
+  - https://docs.spring.io/spring-boot/reference/packaging/class-data-sharing.html
+  - https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds
+- SpringOne 2024 conference talk: https://www.youtube.com/watch?v=h5tL8DCOjLI
 
-AppCDS (new):
-Start with shared archive: 1.69 seconds
-
-# Other
-
-Comments you would like to make
-
-# Helpful Articles
-
-CDS & AppCDS on Java: https://entwickler.de/java/fast-and-furious-001
-AppCDS on Spring: https://docs.spring.io/spring-framework/reference/integration/cds.html
-
-# Further Topics leaning on CDS
+# Further Topics
 
 https://openjdk.org/projects/leyden/
 
