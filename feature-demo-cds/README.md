@@ -138,7 +138,7 @@ improve startup performance. It is not directly related to CDS or AppCDS, but it
 
 # Picture
 
-Architectural images if necessary?
+![cds save point](./themes/assets/cds.png)
 
 # Advantages
 
@@ -159,7 +159,7 @@ Architectural images if necessary?
 
 # Helpful Articles/Talks
 
-- Übersichts-Artikel:
+- Overview-Article:
   - https://dev.java/learn/jvm/cds-appcds/
   - https://entwickler.de/java/fast-and-furious-001
 - AppCDS on Spring Framework: https://docs.spring.io/spring-framework/reference/integration/cds.html
